@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <title>SuperVote</title>
+
+  <link rel="stylesheet" href="styles/index.processed.css">
+
+</head>
+
+<body>
+
+  <div class='wrapper'>
+
+    <div class='header gradient'>
+      <div class='header-home'>SuperVote
+      </div>
+      <div class='header-menu'>
+        <div class='header-menu-btn'>login
+        </div>
+        <div class='header-menu-btn'>signup
+        </div>
+      </div>
+    </div>
+    <!--end header-->
+
+    <div class='main'>
+      <div id='main-head'>
+        <h1>White or brown toast?</h1>
+      </div>
+      <div class='split-main'>
+        <div class='main-left'>
+					Submitted by: <strong><span id='question-submitter'>Lewis</span></strong> on <span id='question-submitted'>01/01/1900</span>.
+					<br> Answered <strong><span id='question-answers'>0</span></strong> times.
+        </div>
+        <div class='main-right'>
+          <div class='question-response'>
+            White
+          </div>
+          <div class='question-response'>
+            Brown
+          </div>
+          <div class='question-response' id='question-response-add'>
+            <input type='text' autocomplete='off' placeholder='Add your response' onfocus='this.placeholder = ""' onblur='this.placeholder = "Add your response"'>
+            </input>
+          </div>
+					<div class='question-nav'>
+  	        <div class='button question-nav-btn' id='question-nav-skip'>
+    	        skip
+      	    </div>
+        	  <div class='button question-nav-btn' id='question-nav-vote'>
+          	  vote
+	          </div>
+						<div class='button question-nav-btn' id='question-nav-results'>
+    	        results
+      	    </div>
+        	</div>
+        </div><!--end question-right-->
+      </div>
+      <!--end question-main-->
+    </div>
+    <!--end main-->
+
+    <div class='footer-push'></div>
+  </div>
+  <!--end wrapper-->
+
+  <div class='footer gradient'>
+    <div class='footer-links'>
+      <a href='#'>about</a>
+      <a href='#'>privacy</a>
+      <a href='#'>contact</a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="scripts/index.js"></script>
+</body>
+
+</html>

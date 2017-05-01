@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="UTF-8" />
+  <title>{{metaTitle}}</title>
+  
+  <link rel="stylesheet" href="css/styles.css">
+	
+</head>
+
+<body>
+  
+  <div class='wrapper'>
+		
+	<div class='header gradient'>
+		<a href='../' class='header-home'>SuperVote</a>
+		<div class='header-menu'>
+			<a href='{{headerBtn1Href}}' class='header-menu-btn'>
+				{{headerBtn1}}
+			</a>
+			<a href='{{headerBtn2Href}}' class='header-menu-btn'>
+				{{headerBtn2}}
+			</a>
+		</div>
+	</div><!--end header-->
+
+	<div class='main'>
+
+    	<div id='main-head'>
+        	<h1>{{userName}}</h1>
+      	</div>
+
+      	<div class='split-main'>
+
+        	<div class='main-left'>
+				<p>{{userName}} joined on {{userJoinDate}}.</p>
+				<p>They've submitted {{userQuestionCount}} questions with {{userQuestionResponses}} total responses.</p>
+        	</div>
+
+        	<div class='main-right'>
+        	{{#each userQuestions}}
+        		<div class='profile-question'>
+					<a href='../q/{{id}}'>{{question}}</a> [{{score}}] - {{submitted}}
+				</div>
+        	{{/each}}
+        	</div>
+
+      	</div><!--end split-main-->
+    </div><!--end main-->
+		
+	<div class='footer-push'></div>
+</div><!--end wrapper-->
+	
+<div class='footer gradient'>
+	<div class='footer-links'>
+		<a href='../about'>about</a>
+		<a href='../privacy'>privacy</a>
+		<a href='../contact'>contact</a>
+	</div>
+</div>
+
+</body>
+</html>
