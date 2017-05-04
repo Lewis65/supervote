@@ -46,7 +46,8 @@ app.get('/login', function (req, res, next){
 //signup
 
 app.get('/signup', function(req, res, next){
-	res.render('signup', { message: req.flash('signupMessage') });
+	res.render('signup');
+	//, { message: req.flash('signupMessage') }
 })
 //app.post('/signup', handle signup submit)
 

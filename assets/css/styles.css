@@ -10,9 +10,18 @@ html, body {
 	margin: 0;
 }
 
+input {
+	color: #000;
+	font-family: 'Open Sans', sans-serif;
+}
+
+input:focus, button:focus {
+    outline: none;
+}
+
 .button {
 	border: 0;
-	border-radius: 14px;
+	border-radius: 8px;
 	color: #FFFFFF;
 	font-size: 18px;
 	font-weight: 700;
@@ -42,12 +51,6 @@ html, body {
 	color: #FFF;
 	margin: 4px;
 	padding: 10px;
-}
-
-form input {
-	border: 2px solid #DDD;
-	border-radius: 4px;
-	padding: 4px;
 }
 
 .footer, .footer-push, .header {
@@ -128,8 +131,22 @@ form input {
 	text-align: center;
 }
 
+.login form input {
+	border: 2px solid #DDD;
+	border-radius: 8px;
+	padding: 4px;
+}
+
+.login form input:focus {
+	border: 2px solid #33A8FF;
+}
+
+.login form input .error {
+	border: 2px solid red;
+}
+
 .login table {
-	margin: 32px auto;
+	margin: 16px auto;
 }
 
 .login table tr td {
