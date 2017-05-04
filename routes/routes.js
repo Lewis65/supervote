@@ -45,18 +45,21 @@ app.get('/q', function(req, res, next) {
 //login
 
 app.get('/login', function (req, res, next){
-	res.render('login');
-	//, { message: req.flash('loginMessage') }
+	res.render('login', { message: req.flash('loginMessage') });
 });
 //app.post('/login', handle login submit);
 
 //signup
 
 app.get('/signup', function(req, res, next){
-	res.render('signup');
-	//, { message: req.flash('signupMessage') }
+	res.render('signup', { message: req.flash('signupMessage') });
 })
-//app.post('/signup', handle signup submit)
+
+app.post('/signup', passport.authenticate('local-signup', {
+	successRedirect: '/profile',
+	failureRedirect: '/signup',
+	failureFlash: true
+}));
 
 //logout
 

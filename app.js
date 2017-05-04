@@ -15,7 +15,15 @@ var favicon = require('serve-favicon');
 var configDB = require('./config/db.js');
 
 //config
-//mongoose.connect(configDB.url);
+mongoose.connect(configDB.url);
+require('./config/passport')(passport);
+
+//app.use(favicon(path.join(__dirname, 'assets', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'assets')));
 
 // view engine setup
 var hbs = require('express-hbs');
@@ -25,13 +33,11 @@ app.engine('hbs', hbs.express4({
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
-
-//app.use(favicon(path.join(__dirname, 'assets', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'assets')));
+//sessions
+app.use(session({secret: 'iamsupersecretguys'}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 //routes
 require('./routes/routes.js')(app, passport);

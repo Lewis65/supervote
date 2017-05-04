@@ -4,9 +4,10 @@ var bcrypt = require('bcrypt-nodejs');
 var userSchema = mongoose.Schema({
 	email: String,
 	username: String,
+	usernameLower: String,
 	password: String,
 	questions: Array,
-	joinDate: {type: Date, default: Date.now}
+	joinDate: Date
 });
 
 //Methods
