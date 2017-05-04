@@ -11,13 +11,14 @@ html, body {
 }
 
 .button {
+	border: 0;
 	border-radius: 14px;
 	color: #FFFFFF;
 	font-size: 18px;
 	font-weight: 700;
 	margin: auto;
+	min-width: 100px;
 	padding: 12px;
-	max-width: 160px;
 	text-align: center;
 }
 
@@ -29,6 +30,24 @@ html, body {
 
 .button-cta {
 	background-color: #4049FF;
+}
+
+.flash {
+	display: block;
+}
+
+.flash-msg {
+	background-color: #33A8FF;
+	border-radius: 8px;
+	color: #FFF;
+	margin: 4px;
+	padding: 10px;
+}
+
+form input {
+	border: 2px solid #DDD;
+	border-radius: 4px;
+	padding: 4px;
 }
 
 .footer, .footer-push, .header {
@@ -105,8 +124,32 @@ html, body {
 	border: 1px solid #FFF;
 }
 
+.login {
+	text-align: center;
+}
+
+.login table {
+	margin: 32px auto;
+}
+
+.login table tr td {
+	padding: 4px;
+	text-align: right;
+}
+
+.login table tr td button {
+	width: 100%;
+}
+
 .main {
 	padding: 20px 20%;
+}
+
+.main a {
+	border-bottom: 2px solid #33A8FF;
+	color: #33A8FF;
+	font-weight: 700;
+	text-decoration: none;
 }
 
 #main-head h1 {

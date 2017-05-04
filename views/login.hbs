@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="UTF-8" />
+  <title>{{metaTitle}}</title>
+  <meta name="description" content={{metaDesc}}>
+  
+  <link rel="stylesheet" href="css/styles.css">
+	
+</head>
+
+<body>
+  
+  <div class='wrapper'>
+		
+	<div class='header gradient'>
+		<a href='../' class='header-home'>SuperVote</a>
+		<div class='header-menu'>
+			<a href='{{headerBtn1Href}}' class='header-menu-btn'>
+					{{headerBtn1}}
+			</a>
+			<a href='{{headerBtn2Href}}' class='header-menu-btn'>
+					{{headerBtn2}}
+			</a>
+		</div>
+	</div><!--end header-->
+		
+	<div class='main'>
+
+		<div id='main-head'>
+			<h1>Login</h1>
+		</div>
+
+		<div class='flash'>
+			{{#each message}}
+				<div class='flash-msg'>
+					{{{message}}}
+				</div>
+			{{/each}}
+		</div>
+
+		<div class='login'>
+			<form action='/login' method='post'>
+				<table>
+					<tr>
+						<td>
+							<label>Email</label>
+						</td>
+						<td>
+							<input type='text' name='email'>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>Password</label>
+						</td>
+						<td>
+							<input type='password' name='password'>
+						</td>
+					</tr>
+					<tr>
+						<td colspan=2>
+							<button type='submit' class='button button-cta'>Login</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+			<p>Or if you don't have an account yet, <a href='/signup'>signup here</a>.</p>
+		</div>
+
+	</div><!--end main-->
+		
+	<div class='footer-push'></div>
+</div><!--end wrapper-->
+	
+<div class='footer gradient'>
+	<div class='footer-links'>
+		<a href='../about'>about</a>
+		<a href='../privacy'>privacy</a>
+		<a href='../contact'>contact</a>
+	</div>
+</div>
+
+</body>
+</html>

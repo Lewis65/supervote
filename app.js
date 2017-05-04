@@ -12,7 +12,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var favicon = require('serve-favicon');
 
-var router = require('./routes/router');
 var configDB = require('./config/db.js');
 
 //config

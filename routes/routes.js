@@ -3,14 +3,7 @@ module.exports = function(app, passport){
 // home
 
 app.get('/', function(req, res, next) {
-	var isLoggedIn = false;
-	var headerBtn = [{text: "login", href: "../login"}, 
-		{text: "signup", href: "../signup"}];
-
-	if (isLoggedIn){
-		headerBtn = [{text: "logout", href: "../logout"}, 
-		{text: "profile", href: "../profile"}];
-	}
+	var headerBtn = headerAuthCheck(req);
 
 	let data = {
 	  	metaTitle: "SuperVote",
@@ -45,7 +38,8 @@ app.get('/q', function(req, res, next) {
 //login
 
 app.get('/login', function (req, res, next){
-	res.render('login', { message: req.flash('loginMessage') });
+	res.render('login');
+	//, { message: req.flash('loginMessage') }
 });
 //app.post('/login', handle login submit);
 
@@ -69,7 +63,23 @@ app.get('/logout', function(req, res, next){
 
 //check if user is currently logged in
 function isLoggedIn(req, res, next){
+
 	if (req.isAuthenticated())
 		return next();
 	res.redirect('/');
+
+}
+
+//Change header buttons if user is logged in
+function headerAuthCheck(req){
+
+	var buttons = [{text: "login", href: "/login"}, 
+		{text: "signup", href: "/signup"}];
+
+	if (req.isAuthenticated){
+		buttons = [{text: "logout", href: "/logout"}, 
+		{text: "profile", href: "/u"}];
+	}
+
+	return buttons;
 }
