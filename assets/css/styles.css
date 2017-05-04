@@ -141,10 +141,6 @@ input:focus, button:focus {
 	border: 2px solid #33A8FF;
 }
 
-.login form input .error {
-	border: 2px solid red;
-}
-
 .login table {
 	margin: 16px auto;
 }
@@ -152,6 +148,10 @@ input:focus, button:focus {
 .login table tr td {
 	padding: 4px;
 	text-align: right;
+}
+
+.login table tr td .error {
+	background-color: #ffcccc;
 }
 
 .login table tr td button {
