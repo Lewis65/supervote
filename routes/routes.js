@@ -20,12 +20,19 @@ app.get('/', function(req, res, next) {
 	res.render('default', data);
 });
 
-//user profile
+//my profile
 
-app.get('/u', isLoggedIn, function(req, res, next){
-	res.render('profile', {
+app.get('/profile', isLoggedIn, function(req, res, next){
+	res.render('user', {
 		user: req.user
 	});
+});
+
+//other user's profile
+
+app.get('/u/:username', function(req, res, next){
+	console.log(req.params);
+	res.render('user');
 });
 
 // answer questions
@@ -67,7 +74,7 @@ function isLoggedIn(req, res, next){
 
 	if (req.isAuthenticated())
 		return next();
-	res.redirect('/');
+	res.redirect('/login');
 
 }
 
@@ -79,7 +86,7 @@ function headerAuthCheck(req){
 
 	if (req.isAuthenticated){
 		buttons = [{text: "logout", href: "/logout"}, 
-		{text: "profile", href: "/u"}];
+		{text: "profile", href: "/profile"}];
 	}
 
 	return buttons;
