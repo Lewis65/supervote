@@ -2,16 +2,15 @@ module.exports = function(app, passport){
 
 // home
 
-app.get('/', function(req, res, next) {
-	var headerBtn = headerAuthCheck(req);
+app.get('/', headerAuthCheck, function(req, res, next) {
 
 	let data = {
 	  	metaTitle: "SuperVote",
   		metaDesc: "Welcome to SuperVote, the platform where you can ask strangers anything.",
-	  	headerBtn1: headerBtn[0].text,
-  		headerBtn1Href: headerBtn[0].href,
-	  	headerBtn2: headerBtn[1].text,
-  		headerBtn2Href: headerBtn[1].href,
+	  	headerBtn1: req.headerBtns[0].text,
+		headerBtn1Href: req.headerBtns[0].href,
+		headerBtn2: req.headerBtns[1].text,
+		headerBtn2Href: req.headerBtns[1].href,
 	  	mainHeading: "Ask us anything.",
   		mainBody: "<p>SuperVote allows you to view, answer, and ask any question you like. You can see what everyone else is thinking, too.</p>" +
 	  	"<div class='button button-cta'><a href='/q'>Start answering</a></div>"
@@ -22,38 +21,103 @@ app.get('/', function(req, res, next) {
 
 //my profile
 
-app.get('/profile', isLoggedIn, function(req, res, next){
-	console.log(req.user);
-	res.render('user', {
-		user: req.user
-	});
+app.get('/profile', isLoggedIn, headerAuthCheck, function(req, res, next){
+
+	console.log(req);
+
+	let data = {
+		metaTitle: 'Supervote - ' + req.user.username + "'s profile",
+		metaDesc: '',
+		headerBtn1: req.headerBtns[0].text,
+		headerBtn1Href: req.headerBtns[0].href,
+		headerBtn2: req.headerBtns[1].text,
+		headerBtn2Href: req.headerBtns[1].href,
+		userJoinDate: req.user.joinDate,
+		userQuestions: req.user.questions,
+		userQuestionCount: req.user.questions.length,
+		userQuestionResponses: 0
+	}
+
+	for (var i = 0; i < req.user.questions.length; i++) {
+		profile.userQuestionResponses += req.user.questions[i].score;
+	}
+
+	res.render('profile', data);
+
 });
 
 //other user's profile
 
-app.get('/u/:username', function(req, res, next){
+app.get('/u/:username', headerAuthCheck, function(req, res, next){
+
+	let data = {
+		metaTitle: 'Supervote - ' + req.params.username + "'s profile",
+		metaDesc: '',
+		headerBtn1: req.headerBtns[0].text,
+		headerBtn1Href: req.headerBtns[0].href,
+		headerBtn2: req.headerBtns[1].text,
+		headerBtn2Href: req.headerBtns[1].href,
+		userJoinDate: '',
+		userQuestions: [],
+		userQuestionCount: '',
+		userQuestionResponses: 0
+	}
+
 	console.log(req.params);
-	res.render('user');
+
+	res.render('user', data);
 });
 
 // answer questions
 
-app.get('/q', function(req, res, next) {
-	res.render('question');
+app.get('/q', headerAuthCheck, function(req, res, next) {
+
+	let data = {
+		metaTitle: 'Supervote',
+		metaDesc: '',
+		headerBtn1: req.headerBtns[0].text,
+		headerBtn1Href: req.headerBtns[0].href,
+		headerBtn2: req.headerBtns[1].text,
+		headerBtn2Href: req.headerBtns[1].href
+	}
+
+	res.render('question', data);
 });
 
 //ACCOUNTS
 //login
 
-app.get('/login', function (req, res, next){
-	res.render('login', { message: req.flash('loginMessage') });
+app.get('/login', isNotLoggedIn, headerAuthCheck, function (req, res, next){
+
+	let data = {
+		metaTitle: 'Supervote - Login',
+		metaDesc: '',
+		headerBtn1: req.headerBtns[0].text,
+		headerBtn1Href: req.headerBtns[0].href,
+		headerBtn2: req.headerBtns[1].text,
+		headerBtn2Href: req.headerBtns[1].href,
+		message: req.flash('loginMessage')
+	}
+
+	res.render('login', data);
 });
 //app.post('/login', handle login submit);
 
 //signup
 
-app.get('/signup', function(req, res, next){
-	res.render('signup', { message: req.flash('signupMessage') });
+app.get('/signup', headerAuthCheck, function(req, res, next){
+
+	let data = {
+		metaTitle: 'Supervote - Login',
+		metaDesc: '',
+		headerBtn1: req.headerBtns[0].text,
+		headerBtn1Href: req.headerBtns[0].href,
+		headerBtn2: req.headerBtns[1].text,
+		headerBtn2Href: req.headerBtns[1].href,
+		message: req.flash('signupMessage')
+	}
+
+	res.render('signup', data);
 })
 
 app.post('/signup', passport.authenticate('local-signup', {
@@ -82,16 +146,33 @@ function isLoggedIn(req, res, next){
 
 }
 
+function isNotLoggedIn(req, res, next){
+
+	if (req.isAuthenticated())
+		return next();
+	res.redirect('/');
+
+}
+
 //Change header buttons if user is logged in
-function headerAuthCheck(req){
+function headerAuthCheck(req, res, next){
 
-	var buttons = [{text: "login", href: "/login"}, 
-		{text: "signup", href: "/signup"}];
+	console.log("=====CHECKING USER AUTH=====");
+	console.log("REQ.USER");
+	console.log(req.user);
+	console.log("REQ.ISAUTHENTICATED");
+	console.log(req.isAuthenticated);
 
-	if (req.isAuthenticated){
-		buttons = [{text: "logout", href: "/logout"}, 
+	if (req.user){
+		req.headerBtns = [{text: "logout", href: "/logout"}, 
 		{text: "profile", href: "/profile"}];
+	} else {
+		req.headerBtns = [{text: "login", href: "/login"}, 
+		{text: "signup", href: "/signup"}];
 	}
 
-	return buttons;
+	console.log(req.headerBtns);
+	console.log("=====Next middleware...=====")
+
+	return next();
 }
