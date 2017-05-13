@@ -101,7 +101,12 @@ app.get('/login', isNotLoggedIn, headerAuthCheck, function (req, res, next){
 
 	res.render('login', data);
 });
-//app.post('/login', handle login submit);
+
+app.post('/login', passport.authenticate('local-login', {
+	successRedirect: '/profile',
+	failureRedirect: '/login',
+	failureFlash: true
+}));
 
 //signup
 
@@ -135,7 +140,7 @@ app.get('/logout', function(req, res, next){
 
 };
 
-//MIDDLEWARE
+//=====MIDDLEWARE=====
 
 //check if user is currently logged in
 function isLoggedIn(req, res, next){
