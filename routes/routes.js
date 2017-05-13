@@ -1,5 +1,10 @@
 module.exports = function(app, passport){
 
+app.all('*', function(req, res, next){
+	console.log("NAVIGATING TO: " + req.path);
+	next();
+});
+
 // home
 
 app.get('/', headerAuthCheck, function(req, res, next) {
@@ -166,8 +171,6 @@ function headerAuthCheck(req, res, next){
 	console.log("=====CHECKING USER AUTH=====");
 	console.log("REQ.USER");
 	console.log(req.user);
-	console.log("REQ.ISAUTHENTICATED");
-	console.log(req.isAuthenticated);
 
 	if (req.user){
 		req.headerBtns = [{text: "logout", href: "/logout"}, 
@@ -177,8 +180,9 @@ function headerAuthCheck(req, res, next){
 		{text: "signup", href: "/signup"}];
 	}
 
+	console.log("=====HEADER BUTTONS=====");
 	console.log(req.headerBtns);
-	console.log("=====Next middleware...=====")
+	console.log("End of headerAuthCheck.");
 
 	return next();
 }
@@ -186,10 +190,10 @@ function headerAuthCheck(req, res, next){
 function passwordCheck(req, res, next){
 	console.log(req.body)
 
-	if(req.body.password!==req.body.confirmPassword){
+	if(req.body.password!==req.body.confirmpassword){
 		req.flash('signupMessage', 'Sorry, those passwords don\'t match.');
 		res.redirect('/signup');
+	} else {
+		return next();
 	}
-
-	return next();
 }

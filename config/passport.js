@@ -45,6 +45,7 @@ module.exports = function(passport){
 					newUser.questions = [];
 					newUser.joinDate = Date.now();
 
+					console.log('=====CREATING NEW USER=====');
 					console.log(newUser);
 
 					newUser.save(function(err){
