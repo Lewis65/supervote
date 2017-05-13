@@ -209,6 +209,15 @@ input:focus, button:focus {
 	text-decoration: none;
 }
 
+.profile-question-head {
+	background-color: #33A8FF;
+	border-radius: 14px 14px 0 0;
+	color: #FFF;
+	font-weight: 700;
+	padding: 4px;
+	text-align: center;
+}
+
 .question-left a {
 	border-bottom: 2px solid #33A8FF;
 	color: #33A8FF;

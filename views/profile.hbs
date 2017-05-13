@@ -36,11 +36,16 @@
       	<div class='split-main'>
 
         	<div class='main-left'>
-				<p>You joined on {{userJoinDate}}.</p>
+        		<p>Hey, {{userName}}!</p>
 				<p>You've submitted {{userQuestionCount}} questions with {{userQuestionResponses}} total responses.</p>
+				<p>You joined on {{userJoinDate}}.</p>
         	</div>
 
         	<div class='main-right'>
+        		<div class='profile-question-head'>
+        			My questions
+        		</div>
+<!--NOTE Add a conditional to handle profiles with no questions here and in user.hbs-->
         	{{#each userQuestions}}
         		<div class='profile-question'>
 					<a href='../q/{{id}}'>{{question}}</a> [{{score}}] - {{submitted}}

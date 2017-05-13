@@ -35,11 +35,14 @@
       	<div class='split-main'>
 
         	<div class='main-left'>
-				<p>{{userName}} joined on {{userJoinDate}}.</p>
-				<p>They've submitted {{userQuestionCount}} questions with {{userQuestionResponses}} total responses.</p>
+				<p>{{userName}} has submitted {{userQuestionCount}} questions with {{userQuestionResponses}} total responses.</p>
+				<p>They joined on {{userJoinDate}}.</p>
         	</div>
 
         	<div class='main-right'>
+        		<div class='profile-question-head'>
+        			{{userName}}'s questions
+        		</div>
         	{{#each userQuestions}}
         		<div class='profile-question'>
 					<a href='../q/{{id}}'>{{question}}</a> [{{score}}] - {{submitted}}

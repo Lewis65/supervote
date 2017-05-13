@@ -31,6 +31,7 @@ app.get('/profile', isLoggedIn, headerAuthCheck, function(req, res, next){
 		headerBtn2: req.headerBtns[1].text,
 		headerBtn2Href: req.headerBtns[1].href,
 		userJoinDate: req.user.joinDate,
+		userName: req.user.username,
 		userQuestions: req.user.questions,
 		userQuestionCount: req.user.questions.length,
 		userQuestionResponses: 0
