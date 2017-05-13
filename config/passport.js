@@ -57,4 +57,29 @@ module.exports = function(passport){
 			});
 		});
 	}));
+
+	//Local login
+	passport.use('local-login', new LocalStrategy({
+		usernameField: 'username',
+		passwordField: 'password',
+		passReqToCallback: true
+	},
+	function (req, username, password, done) {
+		User.findOne({'username': username}, function(err, user){
+			//Return any errors
+			if(err)
+				return done(err);
+
+			//If user not found
+			if(!user)
+				return done(null, false, req.flash('loginMessage', 'Sorry, we couldn\'t find that user.'));
+
+			//If incorrect password
+			if(!user.validPassword(password))
+				return done(null, flase, req.flash('loginMessage', 'Sorry, that password is incorrect.'));
+
+			//If user found and password correct
+			return done(null, user);
+		});
+	}));
 };
