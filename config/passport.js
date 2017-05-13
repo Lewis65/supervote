@@ -76,7 +76,7 @@ module.exports = function(passport){
 
 			//If incorrect password
 			if(!user.validPassword(password))
-				return done(null, flase, req.flash('loginMessage', 'Sorry, that password is incorrect.'));
+				return done(null, false, req.flash('loginMessage', 'Sorry, that password is incorrect.'));
 
 			//If user found and password correct
 			return done(null, user);

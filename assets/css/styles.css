@@ -38,13 +38,15 @@ input:focus, button:focus {
 
 .flash {
 	display: block;
+	text-align: center;
 }
 
 .flash-msg {
 	background-color: #33A8FF;
 	border-radius: 8px;
 	color: #FFF;
-	margin: 4px;
+	display: inline-block;
+	margin: 4px auto;
 	padding: 10px;
 }
 

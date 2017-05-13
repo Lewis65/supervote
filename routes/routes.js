@@ -23,8 +23,6 @@ app.get('/', headerAuthCheck, function(req, res, next) {
 
 app.get('/profile', isLoggedIn, headerAuthCheck, function(req, res, next){
 
-	console.log(req);
-
 	let data = {
 		metaTitle: 'Supervote - ' + req.user.username + "'s profile",
 		metaDesc: '',
@@ -125,7 +123,7 @@ app.get('/signup', headerAuthCheck, function(req, res, next){
 	res.render('signup', data);
 })
 
-app.post('/signup', passport.authenticate('local-signup', {
+app.post('/signup', passwordCheck, passport.authenticate('local-signup', {
 	successRedirect: '/profile',
 	failureRedirect: '/signup',
 	failureFlash: true
@@ -180,6 +178,17 @@ function headerAuthCheck(req, res, next){
 
 	console.log(req.headerBtns);
 	console.log("=====Next middleware...=====")
+
+	return next();
+}
+
+function passwordCheck(req, res, next){
+	console.log(req.body)
+
+	if(req.body.password!==req.body.confirmPassword){
+		req.flash('signupMessage', 'Sorry, those passwords don\'t match.');
+		res.redirect('/signup');
+	}
 
 	return next();
 }
