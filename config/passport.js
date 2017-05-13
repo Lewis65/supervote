@@ -22,7 +22,7 @@ module.exports = function(passport){
 		passwordField: 'password',
 		passReqToCallback: true
 	},
-	function(req, username, email, password, done){
+	function(req, username, password, done){
 
 		//async
 		process.nextTick(function(){
@@ -36,34 +36,22 @@ module.exports = function(passport){
 					//if username in use
 					return done(null, false, req.flash('signupMessage', 'Sorry, that username is already in use.'))
 				} else {
+					//if username not in use
+					var newUser = new User();
 
-					User.findOne({'email':email}, function(err, user){
+					newUser.password = newUser.generateHash(password);
+					newUser.username = username;
+					newUser.usernameLower = username.toLowerCase();
+					newUser.questions = [];
+					newUser.joinDate = Date.now();
+
+					console.log(newUser);
+
+					newUser.save(function(err){
 						if (err) {
-							return done(err);
+							throw err;
 						}
-
-						if (user) {
-							//if email in use
-							return done(null, false, req.flash('signupMessage', 'Sorry, that email is already in use.'))
-						} else {
-
-							//if email not in use
-							var newUser = new User();
-
-							newUser.email = email;
-							newUser.password = newUser.generateHash(password);
-							newUser.username = username;
-							newUser.usernameLower = username.toLowerCase();
-							newUser.questions = [];
-							newUser.joinDate = Date.now;
-
-							newUser.save(function(err){
-								if (err) {
-									throw err;
-								}
-								return done(null, newUser);
-							});
-						}
+						return done(null, newUser);
 					});
 				}
 			});

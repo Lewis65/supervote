@@ -23,6 +23,7 @@ app.get('/', function(req, res, next) {
 //my profile
 
 app.get('/profile', isLoggedIn, function(req, res, next){
+	console.log(req.user);
 	res.render('user', {
 		user: req.user
 	});
