@@ -42,20 +42,31 @@
         	</div>
 
         	<div class='main-right'>
+
         		<div class='profile-question-head'>
         			My questions
+        			<a href='/q/new' id='profile-question-add'>+</a>
         		</div>
-<!--NOTE Add a conditional to handle profiles with no questions here and in user.hbs-->
-        	{{#each userQuestions}}
-        		<div class='profile-question'>
-					<a href='../q/{{id}}'>{{question}}</a> [{{score}}] - {{submitted}}
-				</div>
-				<div class='profile-question-ctl'>
-					<a href='#'>edit</a>
-					<a href='#'>delete</a>
-				</div>
-        	{{/each}}
-        	</div>
+
+        		<div class='profile-question-body'>
+				{{#if userQuestions}}
+        			{{#each userQuestions}}
+        			<div class='profile-question'>
+						<a href='../q/{{id}}'>{{question}}</a> [{{score}}] - {{submitted}}
+					</div>
+					<div class='profile-question-ctl'>
+						<a href='#'>edit</a>
+						<a href='#'>delete</a>
+					</div>
+        			{{/each}}
+        		{{else}}
+        			<div class='profile-question' id='profile-question-none'>
+        				Nothing here yet.
+        			</div>
+        		{{/if}}
+        		</div>
+
+        	</div><!--end main-right-->
 
       	</div><!--end split-main-->
     </div><!--end main-->
