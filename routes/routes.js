@@ -72,7 +72,27 @@ app.get('/u/:username', headerAuthCheck, function(req, res, next){
 	res.render('user', data);
 });
 
-// answer questions
+
+//=====QUESTIONS=====
+
+//NEW QUESTION
+
+app.get('/q/new', //isLoggedIn, 
+	headerAuthCheck, function(req, res, next) {
+
+	let data = {
+		metaTitle: 'Supervote - New question',
+		metaDesc: 'Write a new question on Supervote',
+		headerBtn1: req.headerBtns[0].text,
+		headerBtn1Href: req.headerBtns[0].href,
+		headerBtn2: req.headerBtns[1].text,
+		headerBtn2Href: req.headerBtns[1].href
+	}
+
+	res.render('newquestion', data);
+});
+
+//ANSWER QUESTIONS
 
 app.get('/q', headerAuthCheck, function(req, res, next) {
 
@@ -88,9 +108,11 @@ app.get('/q', headerAuthCheck, function(req, res, next) {
 	res.render('question', data);
 });
 
-//ACCOUNTS
-//login
 
+//=====ACCOUNTS=====
+
+//LOGIN
+//Render the login form if not already logged in, else redirect to home
 app.get('/login', isNotLoggedIn, headerAuthCheck, function (req, res, next){
 
 	let data = {
@@ -112,8 +134,9 @@ app.post('/login', passport.authenticate('local-login', {
 	failureFlash: true
 }));
 
-//signup
+//SIGNUP
 
+//Render the signup form
 app.get('/signup', headerAuthCheck, function(req, res, next){
 
 	let data = {
@@ -129,13 +152,15 @@ app.get('/signup', headerAuthCheck, function(req, res, next){
 	res.render('signup', data);
 })
 
+//Upon submission of the signup form
 app.post('/signup', passwordCheck, passport.authenticate('local-signup', {
 	successRedirect: '/profile',
 	failureRedirect: '/signup',
 	failureFlash: true
 }));
 
-//logout
+
+//LOGOUT
 
 app.get('/logout', function(req, res, next){
 	req.logout();
@@ -158,7 +183,7 @@ function isLoggedIn(req, res, next){
 function isNotLoggedIn(req, res, next){
 
 	if (req.isAuthenticated()){
-		res.redirect('/');
+		res.redirect('/profile');
 	} else {
 		return next();
 	}

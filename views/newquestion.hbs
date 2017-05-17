@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset='UTF-8' />
+  <title>{{metaTitle}}</title>
+  <meta name='description' content={{metaDesc}}>
+  
+  <link rel='stylesheet' href='/css/styles.css'>
+	
+</head>
+
+<body>
+  
+  <div class='wrapper'>
+		
+	<div class='header gradient'>
+		<a href='../' class='header-home'>SuperVote</a>
+		<div class='header-menu'>
+			<a href='{{headerBtn1Href}}' class='header-menu-btn'>
+					{{headerBtn1}}
+			</a>
+			<a href='{{headerBtn2Href}}' class='header-menu-btn'>
+					{{headerBtn2}}
+			</a>
+		</div>
+	</div><!--end header-->
+		
+	<div class='main'>
+
+		<div id='main-head'>
+			<h1>New question</h1>
+		</div>
+
+		<div class='new-question-cont'>
+			<form action='/q/new' method='post'>
+				<div class='new-question'>
+					<div class='new-question-left'>
+						<label>Title</label>
+					</div>
+					<div class='new-question-right'>
+						<input type='text' name='title'>
+					</div>
+				</div>
+				<div class='new-question'>
+					<div class='new-question-left'>
+						<label>Description</label>
+						<p>Enter any relevant details here.</p>
+					</div>
+					<div class='new-question-right'>
+						<textarea name='description' rows='4'></textarea>
+					</div>
+				</div>
+				<div class='new-question'>
+					<div class='new-question-left'>
+						<label>Answers</label>
+						<p>Enter the answers to your question.</p>
+					</div>
+					<div class='new-question-right' id='new-question-answers'>
+						<textarea name='answer1' rows='2'></textarea>
+						<textarea name='answer2' rows='2'></textarea>
+					</div>
+				</div>
+				<div class='new-question'>
+					<div class='new-question-left'></div>
+					<div class='new-question-right'>
+						<button type='button' class='button' id='new-question-add-answer'>Add an option...</button>
+						<button type='submit' class='button button-cta'>Post this question</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+	</div><!--end main-->
+		
+	<div class='footer-push'></div>
+</div><!--end wrapper-->
+	
+<div class='footer gradient'>
+	<div class='footer-links'>
+		<a href='../about'>about</a>
+		<a href='../privacy'>privacy</a>
+		<a href='../contact'>contact</a>
+	</div>
+</div>
+
+</body>
+</html>
