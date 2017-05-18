@@ -5,7 +5,8 @@ app.all('*', function(req, res, next){
 	next();
 });
 
-// home
+
+//HOME
 
 app.get('/', headerAuthCheck, function(req, res, next) {
 
@@ -24,7 +25,10 @@ app.get('/', headerAuthCheck, function(req, res, next) {
 	res.render('default', data);
 });
 
-//my profile
+
+//=====PROFILES=====
+
+//MY PROFILE
 
 app.get('/profile', isLoggedIn, headerAuthCheck, function(req, res, next){
 
@@ -50,7 +54,7 @@ app.get('/profile', isLoggedIn, headerAuthCheck, function(req, res, next){
 
 });
 
-//other user's profile
+//OTHER USER'S PROFILE
 
 app.get('/u/:username', headerAuthCheck, function(req, res, next){
 
@@ -90,6 +94,31 @@ app.get('/q/new', //isLoggedIn,
 	}
 
 	res.render('newquestion', data);
+});
+
+app.post('/q/new', //isLoggedIn,
+	headerAuthCheck, function(req, res, next){
+
+	console.log(req.body);
+
+	let q = {
+		title: req.body.title,
+		description: req.body.description,
+		answers: [],
+		voted: [],
+		posted: Date.now()
+	};
+
+	//Push each answer to an array of objects with scores
+	for (var key in req.body){
+		if(/^answer/.test(key)){
+			q.answers.push({text: req.body[key], score: 0});
+		}
+	};
+
+	console.log(q);
+
+	res.redirect('/');
 });
 
 //ANSWER QUESTIONS
