@@ -1,4 +1,5 @@
-var Question = require('../models/Question.js');
+var Question = require('../models/question.js');
+var User = require('../models/user.js')
 
 module.exports = {
 
@@ -6,10 +7,10 @@ module.exports = {
 
 		var newQuestion = new Question();
 
+		console.log("=====SAVING QUESTION=====");
+
 		//Set the author to the current user in session
 		var author = req.user.username;
-
-		console.log("=====SAVING QUESTION=====");
 
 		//Push each answer to an array of objects with scores
 		for (var key in req.body){
@@ -25,10 +26,20 @@ module.exports = {
 		console.log("-----newQuestion");
 		console.log(newQuestion);
 
-		console.log("-----Making mongoDB call");
+		console.log("-----Saving to mongoDB call");
 		newQuestion.save(function(err){
-			if (err) return err;
-		})
+			if (err) {
+				return err;
+			} else {
+				console.log("-----Saving question to user: " + author);
+				//How can i push the new question to an existing array (user.questions)?
+				//User.findOneAndUpdate({username: author}, )
+			}
+		});
+
+	},
+
+	delete: function (req){
 
 	}
 }
