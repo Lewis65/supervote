@@ -1,5 +1,6 @@
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../models/user');
+var moment = require("moment");
 
 module.exports = function(passport){
 	//Sessions
@@ -43,7 +44,7 @@ module.exports = function(passport){
 					newUser.username = username;
 					newUser.usernameLower = username.toLowerCase();
 					newUser.questions = [];
-					newUser.joinDate = Date.now();
+					newUser.joinDate = moment().format("MMM Do YYYY");
 
 					console.log('=====CREATING NEW USER=====');
 					console.log(newUser);

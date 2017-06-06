@@ -52,11 +52,13 @@
 				{{#if userQuestions}}
         			{{#each userQuestions}}
         			<div class='profile-question'>
-						<a href='../q/{{id}}'>{{question}}</a> [{{score}}] - {{submitted}}
-					</div>
-					<div class='profile-question-ctl'>
-						<a href='#'>edit</a>
-						<a href='#'>delete</a>
+						<a href='../q/{{_id}}'>{{title}}</a> [{{voted.length}}]
+						<br>
+						{{posted}}
+						<div class='profile-question-ctl'>
+							<a href='../q/edit/{{_id}}'>edit</a>
+							<a href='../q/delete/{{_id}}'>delete</a>
+						</div>
 					</div>
         			{{/each}}
         		{{else}}

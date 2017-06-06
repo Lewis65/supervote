@@ -8,7 +8,7 @@ var questionSchema = mongoose.Schema({
 	//[{text: 'answer1', score: 2}, {text: 'answer2', score: 4}]
 	answers: Array,
 	voted: Array,
-	posted: Date,
+	posted: String,
 	author: String
 });
 

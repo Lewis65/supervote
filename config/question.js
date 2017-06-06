@@ -1,5 +1,6 @@
 var Question = require('../models/question.js');
-var User = require('../models/user.js')
+var User = require('../models/user.js');
+var moment = require('moment');
 
 module.exports = {
 
@@ -22,7 +23,7 @@ module.exports = {
 		newQuestion.title = req.body.title;
 		newQuestion.description = req.body.description;
 		newQuestion.voted = [];
-		newQuestion.posted = Date.now();
+		newQuestion.posted = moment().format("MMM Do [']YY");
 		newQuestion.author = author;
 
 		console.log("-----newQuestion");

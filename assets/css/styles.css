@@ -245,6 +245,7 @@ textarea {
 }
 
 .profile-question a {
+	border: 0;
 	color: #582FE8;
 	font-weight: 700;
 	text-decoration: none;
@@ -275,6 +276,11 @@ textarea {
 	justify-content: space-around;
 	min-height: 200px;
 	padding: 8px;
+}
+
+.profile-question-ctl a {
+	font-weight: 400;
+	font-size: 12px;
 }
 
 .profile-question-head {

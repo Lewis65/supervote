@@ -49,7 +49,9 @@
 				{{#if userQuestions}}
         			{{#each userQuestions}}
         			<div class='profile-question'>
-						<a href='../q/{{id}}'>{{question}}</a> [{{score}}] - {{submitted}}
+						<a href='../q/{{_id}}'>{{title}}</a> [{{voted.length}}]
+						<br>
+						{{posted}}
 					</div>
         			{{/each}}
         		{{else}}

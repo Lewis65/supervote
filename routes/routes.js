@@ -49,7 +49,7 @@ app.get('/profile', isLoggedIn, headerAuthCheck, function(req, res, next){
 	}
 
 	for (var i = 0; i < req.user.questions.length; i++) {
-		data.userQuestionResponses += req.user.questions[i].score;
+		data.userQuestionResponses += req.user.questions[i].voted.length;
 	}
 
 	res.render('profile', data);

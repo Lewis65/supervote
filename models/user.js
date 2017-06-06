@@ -6,7 +6,7 @@ var userSchema = mongoose.Schema({
 	usernameLower: String,
 	password: String,
 	questions: Array,
-	joinDate: Date
+	joinDate: String
 });
 
 //Methods
