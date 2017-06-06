@@ -105,7 +105,23 @@ app.post('/q/new', isLoggedIn, headerAuthCheck, function(req, res, next){
 
 });
 
-//ANSWER QUESTIONS
+//ANSWER AND VIEW QUESTIONS
+
+app.get('/q/results/:id', headerAuthCheck, function(req, res, next){
+	//Show question results by id
+	var thisQuestion = question.read(req.params.id);
+	console.log('-----RESULTS FOR QUESTION ID# ' + req.params.id);
+	console.log(thisQuestion);
+	res.redirect('/');
+});
+
+app.get('/q/:id', headerAuthCheck, function(req, res, next){
+	//Show question by id
+	var thisQuestion = question.read(req.params.id);
+	console.log('-----VIEWING QUESTION ID# ' + req.params.id);
+	console.log(thisQuestion);
+	res.redirect('/');
+});
 
 app.get('/q', headerAuthCheck, function(req, res, next) {
 

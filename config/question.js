@@ -4,6 +4,23 @@ var moment = require('moment');
 
 module.exports = {
 
+	delete: function (req){
+
+	},
+
+	read: function (id){
+		var find = Question.findOne({'_id': id});
+		find.exec(function(err, foundQuestion){
+			if (err) {
+				console.log(err);
+				return null;
+			} else {
+				console.log("---Question found.")
+				return foundQuestion;
+			}
+		})
+	},
+
 	save: function (req, res){
 
 		var newQuestion = new Question();
@@ -53,15 +70,5 @@ module.exports = {
 				);
 			}
 		});
-		console.log("---" + author + ".questions:");
-		console.log(req.user.questions);
-
-		console.log("/q/new POST req.body");
-		console.log(req.body)
-
-	},
-
-	delete: function (req){
-
 	}
 }
