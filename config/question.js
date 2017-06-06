@@ -3,7 +3,7 @@ var User = require('../models/user.js')
 
 module.exports = {
 
-	save: function (req){
+	save: function (req, res){
 
 		var newQuestion = new Question();
 
@@ -19,6 +19,8 @@ module.exports = {
 			}
 		};
 
+		newQuestion.title = req.body.title;
+		newQuestion.description = req.body.description;
 		newQuestion.voted = [];
 		newQuestion.posted = Date.now();
 		newQuestion.author = author;
@@ -26,16 +28,35 @@ module.exports = {
 		console.log("-----newQuestion");
 		console.log(newQuestion);
 
-		console.log("-----Saving to mongoDB call");
+		if(newQuestion.title == "" || newQuestion.description == ""){
+			req.flash("newQuestionMessage", "Title and description must not be blank.")
+			res.redirect("/q/new");
+		};
+
+		console.log("-----Saving to questions collection");
 		newQuestion.save(function(err){
 			if (err) {
 				return err;
 			} else {
 				console.log("-----Saving question to user: " + author);
-				//How can i push the new question to an existing array (user.questions)?
-				//User.findOneAndUpdate({username: author}, )
+				User.findByIdAndUpdate(req.user._id, 
+					{$push: {questions: newQuestion}},
+					{safe: true},
+					function(err){
+						if(err){
+							console.log(err);
+						} else {
+							res.redirect("/profile")
+						}
+					}
+				);
 			}
 		});
+		console.log("---" + author + ".questions:");
+		console.log(req.user.questions);
+
+		console.log("/q/new POST req.body");
+		console.log(req.body)
 
 	},
 

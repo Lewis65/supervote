@@ -49,7 +49,7 @@ app.get('/profile', isLoggedIn, headerAuthCheck, function(req, res, next){
 	}
 
 	for (var i = 0; i < req.user.questions.length; i++) {
-		profile.userQuestionResponses += req.user.questions[i].score;
+		data.userQuestionResponses += req.user.questions[i].score;
 	}
 
 	res.render('profile', data);
@@ -92,7 +92,8 @@ app.get('/q/new', //isLoggedIn,
 		headerBtn1: req.headerBtns[0].text,
 		headerBtn1Href: req.headerBtns[0].href,
 		headerBtn2: req.headerBtns[1].text,
-		headerBtn2Href: req.headerBtns[1].href
+		headerBtn2Href: req.headerBtns[1].href,
+		message: req.flash('newQuestionMessage')
 	}
 
 	res.render('newquestion', data);
@@ -100,9 +101,8 @@ app.get('/q/new', //isLoggedIn,
 
 app.post('/q/new', isLoggedIn, headerAuthCheck, function(req, res, next){
 
-	question.save(req);
+	question.save(req, res);
 
-	res.redirect('/');
 });
 
 //ANSWER QUESTIONS
